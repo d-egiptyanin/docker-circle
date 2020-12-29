@@ -26,6 +26,8 @@ jobs:
             docker-compose build
       - save_cache:
           key: v1-{{. Branch }}-{{ epoch }}
+          paths:
+            - /caches/build.tar
 
 workflows:
   version: 2
