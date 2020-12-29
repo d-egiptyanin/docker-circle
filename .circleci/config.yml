@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: /infra
+    working_directory: /build_containers
     docker:
       - image: docker:20.10.1-git
     steps:
@@ -22,8 +22,7 @@ jobs:
       - run:
           name: Build application
           command: |
-            pwd
-            ls -l
+            cd infra
             docker-compose build
       - run:
           name: Trying test up
