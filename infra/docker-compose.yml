@@ -15,8 +15,6 @@ services:
         restart: always
         networks:
             - crm_infra
-        depends_on:
-          - api
         ports:
             - "80:80"
         volumes:

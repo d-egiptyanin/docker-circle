@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  build:
+    working_directory: /infra
+    docker:
+      - image: docker:20.10.1-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install dependencies
+          command: | 
+            apk add docker-compose==1.27.4
+      - restore_cache:
+        keys:
+          - v1-{{ .Branch }}
+        paths:
+          - /cache/build.tar
+      - run:
+          name: Load Docker image layer cache
+          command: |
+            set +o pipefail
+            docker load -i /caches/build.tar | true
+      - run: Build application
+          command: |
+            docker-compose build
+      - run:
+          name: Trying test up
+          command: |
+            docker-compose up
