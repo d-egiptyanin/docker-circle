@@ -24,11 +24,6 @@ jobs:
           command: |
             cd infra
             docker-compose build
-      - run:
-          name: Trying test up
-          command: |
-            cd infra
-            docker-compose up
 
 workflows:
   version: 2
