@@ -18,12 +18,12 @@ jobs:
           name: Load Docker image layer cache
           command: |
             set +o pipefail
-            pwd
-            ls -l
             docker load -i /caches/build.tar | true
       - run:
           name: Build application
           command: |
+            pwd
+            ls -l
             docker-compose build
       - run:
           name: Trying test up
