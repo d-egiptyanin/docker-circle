@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <meta charset="UTF-8">
+    <title>Customer to ZOHO CRM status</title>
+    <style type="text/css">
+        body {
+            background: #4e0656;
+        }
+        .row {
+            border: 1px solid #b5b5b5;
+            padding: 10px;
+            display: table-row;
+        }
+        .row > :first-child {
+            border-left: none;
+        }
+        .row.ok {
+            background: #8fff8f
+        }
+        .row.update {
+            background: #ffe710
+        }
+        .row.new {
+            background: #f3f5f3
+        }
+        .row.error {
+            background: #FF5555
+        }
+        .ID, .MESSAGE, .DATA {
+            display: table-cell;
+            border-bottom: 1px solid #b5b5b5;
+            border-right:  1px solid #b5b5b5;
+            padding: 5px;
+        }
+        .ID {
+            width: 50px;
+        }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+    </div>
+  </body>
+</html>
