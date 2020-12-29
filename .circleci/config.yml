@@ -14,8 +14,6 @@ jobs:
       - restore_cache:
           keys:
             - v1-{{ .Branch }}
-          paths:
-            - /cache/build.tar
       - run:
           name: Load Docker image layer cache
           command: |
