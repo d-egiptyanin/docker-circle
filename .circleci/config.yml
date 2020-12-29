@@ -25,7 +25,8 @@ jobs:
             cd infra
             docker-compose build
       - save_cache:
-          -v1-{{. Branch }}-{{ epoch }}
+          key: 
+            - v1-{{. Branch }}-{{ epoch }}
 
 workflows:
   version: 2
