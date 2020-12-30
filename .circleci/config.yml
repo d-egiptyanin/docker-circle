@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ .Branch }}          
+          key: v4-{{ .Branch }}          
       - run:
           name: Install some soft
           command: |
@@ -23,7 +23,7 @@ jobs:
           path: /tmp/web.tar.gz
           destination: docker_images
       - save_cache:
-          key: v1-{{ .Branch }}-{{ epoch }}
+          key: v4-{{ .Branch }}-{{ epoch }}
           paths:
             - /var/lib/docker/
 
