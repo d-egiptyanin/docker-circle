@@ -18,6 +18,10 @@ jobs:
           command: |
             cd infra
             docker-compose build
+            docker image save web:latest | gzip -9 -c > /tmp/web.tar.gz
+      - store_artifacts:
+          paths: /tmp/web.tar.gz
+          destination: circleci-docs
       - save_cache:
           key: v1-{{ .Branch }}-{{ epoch }}
           paths:
