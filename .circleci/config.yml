@@ -22,7 +22,7 @@ jobs:
             - /caches/cache.tar
 
 workflows:
-  version: 2
+  version: 2.1
   workflow:
     jobs:
     - build
