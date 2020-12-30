@@ -10,7 +10,9 @@ jobs:
           key: v1-{{ .Branch }}          
       - run:
           name: Install some soft
-          command: apt-get update && apt-get install libmysqlclient-dev -y
+          command: |
+            sudo apt-get update && \
+            sudo apt-get install libmysqlclient-dev -y
       - run:
           name: Build application
           command: |
