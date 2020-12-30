@@ -1,36 +1,67 @@
-version: 2
+version: 2.1
 jobs:
   build:
-    working_directory: /build_containers
-    docker:
-      - image: docker:20.10.1-git
+    machine:
+      image: ubuntu-1604:202010-01
+      docker_layer_caching: true
     steps:
       - checkout
-      - setup_remote_docker
-      - run:
-          name: Install dependencies
-          command: | 
-            apk add docker-compose
       - restore_cache:
-          keys:
-            - v1-{{ .Branch }}
+          key: - v1-{{ .Branch }}          
       - run:
-          name: Load Docker image layer cache
-          command: |
-            set +o pipefail
-            docker load -i /caches/build.tar | true
+        name: Install some soft
+        command: apt-get update && apt-get install libmysqlclient-dev -y
       - run:
-          name: Build application
-          command: |
-            cd infra
-            docker-compose build
+        name: Build application
+        command: |
+          cd infra
+          docker-compose build
       - save_cache:
-          key: v1-{{ .Branch }}-{{ epoch }}
+          key: v1-{{ .Branch }}
           paths:
-            - /caches/build.tar
+            - /caches/cache.tar
 
 workflows:
   version: 2
   workflow:
     jobs:
     - build
+
+
+# version: 2
+# jobs:
+#   build:
+#     working_directory: /build_containers
+#     docker:
+#       - image: docker:20.10.1-git
+#     steps:
+#       - checkout
+#       - setup_remote_docker
+#       - run:
+#           name: Install dependencies
+#           command: | 
+#             apk add docker-compose
+#       - restore_cache:
+#           keys:
+#             - v1-{{ .Branch }}
+#       - run:
+#           name: Load Docker image layer cache
+#           command: |
+#             set +o pipefail
+#             docker load -i /caches/build.tar | true
+#       - run:
+#           name: Build application
+#           command: |
+#             cd infra
+#             docker-compose build
+#       - save_cache:
+#           key: v1-{{ .Branch }}-{{ epoch }}
+#           paths:
+#             - /caches/build.tar
+# 
+# workflows:
+#   version: 2
+#   workflow:
+#     jobs:
+#     - build
+# 
