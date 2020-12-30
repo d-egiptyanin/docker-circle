@@ -19,7 +19,7 @@ jobs:
             cd infra
             docker-compose build
       - save_cache:
-          key: v1-{{ .Branch }}
+          key: v1-{{ .Branch }}-{{ epoch }}
           paths:
             - /var/lib/docker/
 
