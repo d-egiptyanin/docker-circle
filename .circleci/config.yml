@@ -21,7 +21,7 @@ jobs:
       - save_cache:
           key: v1-{{ .Branch }}
           paths:
-            - /caches/cache.tar
+            - /var/lib/docker/
 
 workflows:
   version: 2.1
