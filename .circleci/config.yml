@@ -27,11 +27,29 @@ jobs:
           paths:
             - /var/lib/docker/
 
+  deploy:
+    machine:
+      image: ubuntu-2004:202010-01
+      #docker_layer_caching: true
+    steps:
+      - checkout
+      - run:
+          name: Install some soft
+          command: |
+            sudo apt-get update && \
+            sudo apt-get install ansible -y
+      - run:
+          name: Test ansible
+          command: |
+            ansible --version
+            ansible-playbook --version
+
 workflows:
   version: 2.1
   workflow:
     jobs:
     - build
+    - deploy
 
 
 # version: 2
