@@ -78,12 +78,16 @@ workflows:
       - build:
           filters:
             tags:
-              only: /^v*/
-
+              only: /^v5\.*/
+      - hold:
+          type: approval
+          requires:
+            - build
       - deploy:
           type: approval
           requires:
             - build
+            - hold
 
 
 # version: 2
