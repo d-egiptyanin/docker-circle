@@ -39,9 +39,9 @@ jobs:
     steps:
       - checkout
       - ansible:
-        inventory: INVENTORY
-        playbook: ansible/playbook.yaml
-        private-key: SSH_KEY
+          inventory: INVENTORY
+          playbook: ansible/playbook.yaml
+          private-key: SSH_KEY
     #  - run:
     #      name: Install some soft
     #      command: |
