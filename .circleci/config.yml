@@ -22,6 +22,11 @@ jobs:
             cd infra
             docker-compose build
             docker image save infra_web:latest > /tmp/web.tar
+      - run:
+          name: Export images
+          command: |
+            cd infra
+            docker image save infra_web:latest > /tmp/web.tar
       - store_artifacts:
           path: /tmp/web.tar.gz
           destination: docker_images
@@ -72,7 +77,7 @@ workflows:
       - build:
           filters:
             tags:
-              only: /^v.*_build$/
+              only: /^v.*/
 
       - deploy:
           type: approval
