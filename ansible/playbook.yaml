@@ -43,11 +43,12 @@
         wget --verbose --header 'Circle-Token: $CIRCLE_TOKEN' --input-file - -O /tmp/web.tar
 
     - name: Load image from archive and push to a private registry
-      community.docker.docker_image:          
-          tag: v1
-          push: no
-          load_path: /tmp/web.tar
-          source: load
+      community.docker.docker_image:
+        name: web  
+        tag: v1
+        push: no
+        load_path: /tmp/web.tar
+        source: load
       become: yes
 
     - name: Setup docker-compose.yml
