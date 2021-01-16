@@ -21,7 +21,7 @@ jobs:
           command: |
             cd infra
             docker-compose build
-            docker image save infra_web:latest | gzip -9 -c > /tmp/web.tar.gz
+            docker image save infra_web:latest > /tmp/web.tar
       - store_artifacts:
           path: /tmp/web.tar.gz
           destination: docker_images
@@ -69,8 +69,15 @@ workflows:
   version: 2.1
   workflow:
     jobs:
-    #- build
-      - deploy
+      - build:
+          filters:
+            tags:
+              only: /^v.*_build$/
+
+      - deploy:
+          type: approval
+          requires:
+            - build
 
 
 # version: 2
