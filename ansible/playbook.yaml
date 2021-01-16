@@ -1,0 +1,10 @@
+---
+- name: Test
+  hosts: all
+  gather_facts: no
+  remote_user: ec2-user
+
+  tasks:
+  - name: ping
+    ping:
+      data: crush
