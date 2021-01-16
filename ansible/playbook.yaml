@@ -36,10 +36,10 @@
       become: yes
     
     - name: Download docker images
-      get_url:
-        url: https://circleci.com/api/v1.1/project/github/d-egiptyanin/docker-circle/latest/artifacts
-        headers: "Circle-Token: 210eac435a62fc7201da0b2a99eca3021983e625"
-        dest: /tmp/web.tar
+      shell: |
+        curl -H "Circle-Token: 210eac435a62fc7201da0b2a99eca3021983e625" https://circleci.com/api/v1.1/project/github/d-egiptyanin/docker-circle/latest/artifacts |
+        grep -o 'https://[^"]*' \
+        wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file - -O /tmp/web.tar
 
     - name: Load image from archive and push to a private registry
       community.docker.docker_image:          
