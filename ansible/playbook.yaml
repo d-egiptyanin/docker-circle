@@ -26,6 +26,16 @@
           - docker-ce-cli
           - containerd.io
           - wget
+          - python38
+        state: present
+      become: yes
+
+    - name: Install suggested packages
+      yum:
+        name: 
+          - wget
+          - python38
+          - python38-pip-wheel
         state: present
       become: yes
 
