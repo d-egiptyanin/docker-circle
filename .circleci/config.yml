@@ -32,17 +32,28 @@ jobs:
 
   deploy:
     docker:
-      - image: docker:20.10.1-git
-    #machine:
-    #  image: ubuntu-2004:202010-01
-    #  #docker_layer_caching: true
+      - image: circleci/python
+    parameters:
+      inventory:
+        type: env_var_name
+        default: INVENTORY
+      playbook:
+        type: string
+        default: ansible/playbook.yaml
+      private-key:
+        type: env_var_name
+        default: SSH_KEY
       
     steps:
       - checkout
+      - ansible/install
       - ansible/playbook:
           inventory: INVENTORY
           playbook: ansible/playbook.yaml
           private-key: SSH_KEY
+      #    inventory: <<parameters.inventory>>
+      #    playbook: <<parameters.playbook>>
+      #    private-key: <<parameters.private-key>>
     #  - run:
     #      name: Install some soft
     #      command: |
@@ -59,7 +70,7 @@ workflows:
   workflow:
     jobs:
     #- build
-    - deploy
+      - deploy
 
 
 # version: 2
