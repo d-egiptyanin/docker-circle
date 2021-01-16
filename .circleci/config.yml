@@ -21,14 +21,15 @@ jobs:
           command: |
             cd infra
             docker-compose build
-            docker image save infra_web:latest > /tmp/web.tar
       - run:
           name: Export images
           command: |
             cd infra
-            docker image save infra_web:latest > /tmp/web.tar
+            mkdir bin_images
+            docker image save infra_web:latest -o bin_images/web.tar
+            ls -lh bin_images/web.tar
       - store_artifacts:
-          path: /tmp/web.tar.gz
+          path: infra/bin_images/web.tar
           destination: docker_images
       - save_cache:
           key: v4-{{ .Branch }}-{{ epoch }}
@@ -77,7 +78,7 @@ workflows:
       - build:
           filters:
             tags:
-              only: /^v.*/
+              only: /^v*/
 
       - deploy:
           type: approval
