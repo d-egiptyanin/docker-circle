@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   ansible: orbss/ansible-playbook@0.0.5
+
 jobs:
   build:
     machine:
@@ -38,7 +39,7 @@ jobs:
       
     steps:
       - checkout
-      - ansible:
+      - ansible/playbook:
           inventory: INVENTORY
           playbook: ansible/playbook.yaml
           private-key: SSH_KEY
