@@ -11,9 +11,12 @@
     
     - name: Add repository
       yum_repository:
-        name: docker-ce
-        description: docker-ce
-        baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+        name: Docker CE Stable - $basearch
+        baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable
+        enabled: 1
+        gpgcheck: 1
+        gpgkey: https://download.docker.com/linux/centos/gpg
+        description: Docker CE
       become: yes
 
     - name: Install docker engine
