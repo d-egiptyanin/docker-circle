@@ -75,7 +75,7 @@ workflows:
   version: 2.1
   workflow:
     jobs:
-      - build:
+      - build
       - hold:
           type: approval
           requires:
