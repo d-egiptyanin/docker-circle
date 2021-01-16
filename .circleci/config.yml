@@ -53,6 +53,9 @@ jobs:
     steps:
       - checkout
       - ansible/install
+      - ansible/galaxy:
+          galaxy-options: install
+          galaxy-roles-path: community.docker
       - ansible/playbook:
           inventory: INVENTORY
           playbook: ansible/playbook.yaml
