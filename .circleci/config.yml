@@ -76,9 +76,6 @@ workflows:
   workflow:
     jobs:
       - build:
-          filters:
-            tags:
-              only: /^v5\.*/
       - hold:
           type: approval
           requires:
@@ -86,7 +83,7 @@ workflows:
       - deploy:
           requires:
             - build
-            - hold
+            # - hold
 
 
 # version: 2
