@@ -14,6 +14,7 @@
         name: docker-ce
         description: docker-ce
         baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+      become: yes
 
     - name: Install docker engine
       yum:
@@ -22,10 +23,12 @@
           - docker-ce-cli
           - containerd.io
         state: present
+      become: yes
 
     - name: Install Docker Compose (if configured).
       get_url:
         url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
         dest: "{{ docker_compose_path }}"
         mode: 0755
+      become: yes
 
