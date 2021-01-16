@@ -5,6 +5,27 @@
   remote_user: ec2-user
 
   tasks:
-  - name: ping
-    ping:
-      data: crush
+    - name: ping
+      ping:
+        data: crush
+    
+    - name: Add repository
+      yum_repository:
+        name: docker-ce
+        description: docker-ce
+        baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+
+    - name: Install docker engine
+      yum:
+        name: 
+          - docker-ce 
+          - docker-ce-cli
+          - containerd.io
+        state: present
+
+    - name: Install Docker Compose (if configured).
+      get_url:
+        url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
+        dest: "{{ docker_compose_path }}"
+        mode: 0755
+
