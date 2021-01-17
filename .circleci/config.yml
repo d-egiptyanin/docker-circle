@@ -55,6 +55,7 @@ jobs:
           command: |
             pip3 install ansible            
             ansible-galaxy collection install community.general
+    steps:
       - run:
           name: Test ansible
           command: |
