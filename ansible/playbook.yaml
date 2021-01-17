@@ -2,43 +2,43 @@
 - name: Test
   hosts: all
   gather_facts: no
-  remote_user: ec2-user
+  remote_user: ubuntu
 
   tasks:
     - name: ping
       ping:
         data: crush
     
-    - name: Add repository
-      yum_repository:
-        name: Docker CE Stable - $basearch
-        baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable
-        enabled: 1
-        gpgcheck: 1
-        gpgkey: https://download.docker.com/linux/centos/gpg
-        description: Docker CE
-      become: yes
-
-    - name: Install docker engine
-      yum:
-        name: 
-          - docker-ce 
-          - docker-ce-cli
-          - containerd.io
-          - wget
-          - python38
-        state: present
-      become: yes
-
-    - name: Install suggested packages
-      yum:
-        name: 
-          - wget
-          - python38
-          - python38-pip-wheel
-        state: present
-      become: yes
-
+    #- name: Add repository
+    #  yum_repository:
+    #    name: Docker CE Stable - $basearch
+    #    baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable
+    #    enabled: 1
+    #    gpgcheck: 1
+    #    gpgkey: https://download.docker.com/linux/centos/gpg
+    #    description: Docker CE
+    #  become: yes
+#
+    #- name: Install docker engine
+    #  yum:
+    #    name: 
+    #      - docker-ce 
+    #      - docker-ce-cli
+    #      - containerd.io
+    #      - wget
+    #      - python38
+    #    state: present
+    #  become: yes
+#
+    #- name: Install suggested packages
+    #  yum:
+    #    name: 
+    #      - wget
+    #      - python38
+    #      - python38-pip-wheel
+    #    state: present
+    #  become: yes
+#
     - name: Install Docker Compose
       get_url:
         url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64
