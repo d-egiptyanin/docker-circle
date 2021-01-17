@@ -8,7 +8,7 @@
     - name: ping
       ping:
         data: crush
-    
+
     #- name: Add repository
     #  yum_repository:
     #    name: Docker CE Stable - $basearch
@@ -21,8 +21,8 @@
 #
     #- name: Install docker engine
     #  yum:
-    #    name: 
-    #      - docker-ce 
+    #    name:
+    #      - docker-ce
     #      - docker-ce-cli
     #      - containerd.io
     #      - wget
@@ -32,7 +32,7 @@
 #
     #- name: Install suggested packages
     #  yum:
-    #    name: 
+    #    name:
     #      - wget
     #      - python38
     #      - python38-pip-wheel
@@ -52,7 +52,7 @@
         dest: "/usr/local/sbin"
         mode: 0755
       become: yes
-    
+
     - name: Download docker images
       shell: |
         curl -H 'Circle-Token: 210eac435a62fc7201da0b2a99eca3021983e625' https://circleci.com/api/v1.1/project/github/d-egiptyanin/docker-circle/latest/artifacts | \
