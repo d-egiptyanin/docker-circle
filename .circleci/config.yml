@@ -66,14 +66,14 @@ workflows:
   version: 2.1
   workflow:
     jobs:
-      - build:
-          filters:
-            tags:
-              only: /^with_build_machine.*/
-              ignore: /.*/
-      - deploy:
-          requires:
-            - build
+    #  - build:
+    #      filters:
+    #        tags:
+    #          only: /^with_build_machine.*/
+    #          ignore: /.*/
+      - deploy
+    #      requires:
+    #        - build
 
 
 # version: 2
