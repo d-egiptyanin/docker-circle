@@ -2,11 +2,15 @@ version: 2.1
 orbs:
   ansible: orbss/ansible-playbook@0.0.5
 
-jobs:
-  build:
+executors:
+  build_machine:
     machine:
       image: ubuntu-2004:202010-01
       #docker_layer_caching: true
+
+jobs:
+  build:
+    executor: build_machine
     steps:
       - checkout
       - restore_cache:
@@ -37,49 +41,33 @@ jobs:
             - /var/lib/docker/
 
   deploy:
-    docker:
-      - image: circleci/python
-    parameters:
-      inventory:
-        type: env_var_name
-        default: INVENTORY
-      playbook:
-        type: string
-        default: ansible/playbook.yaml
-      private-key:
-        type: env_var_name
-        default: SSH_KEY
+    executor: build_machine
       
     steps:
       - checkout
-      - ansible/install:
-          version: '2.9.6'
-      - ansible/galaxy:
-          #galaxy-options: install
-          galaxy-roles-path: community.docker
-      - ansible/playbook:
-          inventory: INVENTORY
-          playbook: ansible/playbook.yaml
-          private-key: SSH_KEY
-      #    inventory: <<parameters.inventory>>
-      #    playbook: <<parameters.playbook>>
-      #    private-key: <<parameters.private-key>>
-    #  - run:
-    #      name: Install some soft
-    #      command: |
-    #        sudo apt-get update && \
-    #        sudo apt-get install ansible -y
-    #  - run:
-    #      name: Test ansible
-    #      command: |
-    #        ansible --version
-    #        ansible-playbook --version
+      - run:
+          name: Install some soft
+          command: |
+            sudo apt-get update
+            sudo apt-get install ansible -y
+            sudo pip3 install ansible
+      - run:
+          name: Test ansible
+          command: |
+            ansible --version
+            ansible-playbook --version
+      - run:
+          name: Run ansible
+          command: |
+            cd ansible
+            ansible-playbook -i inv playbook.yaml
+
 
 workflows:
   version: 2.1
   workflow:
     jobs:
-      #- build
+      - build
       #- hold:
       #    type: approval
       #    requires:
