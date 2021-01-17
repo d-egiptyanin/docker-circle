@@ -77,7 +77,7 @@ workflows:
     #          only: /^with_build_machine.*/
     #          ignore: /.*/
       - deploy:
-    #      requires:
+          requires:
             - build
 
 
