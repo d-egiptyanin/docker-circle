@@ -69,7 +69,8 @@ workflows:
       - build:
           filters:
             tags:
-              only: with_build_machine
+              only: /^with_build_machine.*/
+              ignore: /.*/
       - deploy:
           requires:
             - build
