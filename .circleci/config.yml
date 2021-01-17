@@ -76,9 +76,9 @@ workflows:
     #        tags:
     #          only: /^with_build_machine.*/
     #          ignore: /.*/
-      - deploy:
-          requires:
-            - build
+      - deploy
+          #requires:
+          #  - build
 
 
 # version: 2
