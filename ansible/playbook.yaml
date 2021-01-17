@@ -39,6 +39,13 @@
     #    state: present
     #  become: yes
 #
+    - name: Install python packages
+      pip:
+        name:
+          - docker
+          - docker-compose
+        state: present
+
     - name: Install Docker Compose
       get_url:
         url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64
