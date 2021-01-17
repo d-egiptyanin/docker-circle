@@ -54,8 +54,8 @@
 
     - name: Load image from archive and push to a private registry
       community.docker.docker_image:
-        name: web  
-        tag: v1
+        name: infra_web
+        tag: latest
         push: no
         load_path: /tmp/web.tar
         source: load
