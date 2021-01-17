@@ -41,7 +41,9 @@ jobs:
             - /var/lib/docker/
 
   deploy:
-    executor: build_machine
+    # executor: build_machine
+    docker:
+      - image: circleci/python:3.8.6-buster
       
     steps:
       - checkout
@@ -51,9 +53,7 @@ jobs:
       - run:
           name: Install some soft
           command: |
-            sudo apt-get update
-            sudo pip3 install ansible
-            sudo pip3 install docker
+            pip3 install ansible            
             ansible-galaxy collection install community.general
       - run:
           name: Test ansible
@@ -71,7 +71,7 @@ workflows:
   version: 2.1
   workflow:
     jobs:
-      - build
+    #  - build
     #      filters:
     #        tags:
     #          only: /^with_build_machine.*/
