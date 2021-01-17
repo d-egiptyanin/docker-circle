@@ -45,7 +45,7 @@ jobs:
       
     steps:
       - checkout
-      - add-ssh-keys:
+      - add_ssh_keys:
           fingerprints:
             - "af:65:55:21:e4:56:09:6e:e3:5d:a7:a9:75:83:94:ff"
       - run:
