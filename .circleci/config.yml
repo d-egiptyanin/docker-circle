@@ -53,7 +53,7 @@ jobs:
     steps:
       - checkout
       - ansible/install:
-          version: 2.9
+          version: '2.9.6'
       - ansible/galaxy:
           #galaxy-options: install
           galaxy-roles-path: community.docker
