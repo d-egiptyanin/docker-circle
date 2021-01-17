@@ -46,8 +46,8 @@ jobs:
     steps:
       - checkout
       - add-ssh-keys:
-          - fingerprints:
-              - "af:65:55:21:e4:56:09:6e:e3:5d:a7:a9:75:83:94:ff"
+          fingerprints:
+            - "af:65:55:21:e4:56:09:6e:e3:5d:a7:a9:75:83:94:ff"
       - run:
           name: Install some soft
           command: |
