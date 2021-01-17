@@ -46,26 +46,27 @@ jobs:
       - image: circleci/python:3.8.6-buster
       
     steps:
-      - checkout
-      - add_ssh_keys:
-          fingerprints:
-            - "af:65:55:21:e4:56:09:6e:e3:5d:a7:a9:75:83:94:ff"
-      - run:
-          name: Install some soft
-          command: |
-            pip3 install ansible            
-            ansible-galaxy collection install community.general
-    steps:
-      - run:
-          name: Test ansible
-          command: |
-            ansible --version
-            ansible-playbook --version
-      - run:
-          name: Run ansible
-          command: |
-            cd ansible
-            ansible-playbook -i inv playbook.yaml
+      - phase_one:
+        - checkout
+        - run:
+            name: Install some soft
+            command: |
+              pip3 install ansible            
+              ansible-galaxy collection install community.general
+      - phase_two:
+        - add_ssh_keys:
+            fingerprints:
+              - "af:65:55:21:e4:56:09:6e:e3:5d:a7:a9:75:83:94:ff"
+        - run:
+            name: Test ansible
+            command: |
+              ansible --version
+              ansible-playbook --version
+        - run:
+            name: Run ansible
+            command: |
+              cd ansible
+              ansible-playbook -i inv playbook.yaml
 
 
 workflows:
