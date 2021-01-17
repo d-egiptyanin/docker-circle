@@ -53,6 +53,7 @@ jobs:
           command: |
             sudo apt-get update
             sudo pip3 install ansible
+            ansible-galaxy collection install community.general
       - run:
           name: Test ansible
           command: |
