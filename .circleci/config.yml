@@ -71,7 +71,7 @@ workflows:
   version: 2.1
   workflow:
     jobs:
-      - build:
+      - build
     #      filters:
     #        tags:
     #          only: /^with_build_machine.*/
