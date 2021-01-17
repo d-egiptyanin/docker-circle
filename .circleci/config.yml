@@ -49,7 +49,6 @@ jobs:
           name: Install some soft
           command: |
             sudo apt-get update
-            sudo apt-get install ansible -y
             sudo pip3 install ansible
       - run:
           name: Test ansible
@@ -67,7 +66,10 @@ workflows:
   version: 2.1
   workflow:
     jobs:
-      - build
+      - build:
+          filters:
+            tags:
+              only: with_build_machine
       - deploy:
           requires:
             - build
